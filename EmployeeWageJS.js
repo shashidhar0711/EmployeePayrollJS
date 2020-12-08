@@ -16,6 +16,7 @@ const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
 const NUM_OF_WORKING_DAYS = 20;
 const MAX_HRS_IN_MONTH = 160;
+let empDailyWageArr = new Array();
 
 let empHrs = 0;
 let totalEmpHrs = 0;
@@ -44,10 +45,16 @@ empWage = empHrs * WAGE_PER_HOUR;
 console.log("Total Hours: " + empHrs + " Employee Wage : " + empWage);
 
 // UC => 5 Calculate Wages till a Condition of total Working Hours or Working Days Reached for a Month
+// UC => 6 Storing Total Employee Wages into array
+function calcDailyWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR;
+}
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
-    totalEmpHrs += getWorkingHours(empCheck);
+    let empHrs= getWorkingHours(empCheck);
+    totalEmpHrs += empHrs;
+    empDailyWageArr.push(calcDailyWage(empHrs));
 }
 empWage = totalEmpHrs * WAGE_PER_HOUR;
 console.log("Total Days : " + totalWorkingDays + "  Total Hours : " + totalEmpHrs + "  Employee Wage : " + empWage);
