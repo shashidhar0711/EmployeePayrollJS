@@ -173,3 +173,28 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS
     );
 }
 console.log("UC10 => Showing Daily Hours Worked and Wage Earned : " +empDailyHrsAndWageArr);
+
+// UC => 11 Perform Following Object Operations Using Arrow Functions.
+// UC => 11A Calculate total Wage and total hours worked
+totalWages = empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+                                      .reduce((totalWage, dailyHrsAndWage) => totalWage += dailyHrsAndWage.dailyWage, 0);
+totalHours = empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+                                      .reduce((totalHours, dailyHrsAndWage) => totalHours += dailyHrsAndWage.dailyHours, 0);
+
+console.log("UC11A => Total Hours: " +totalHours + "\tTotal Wage: " +totalWages);
+
+// UC => 11B Display the Full Workings Days Using foreach
+process.stdout.write("UC11B => Logging Full Work Days")
+empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 8)
+                     .forEach(dailyHrsAndWage => process.stdout.write(dailyHrsAndWage.toString()));
+
+// UC => 11C Show Part Working days Using Map by Reducing to String Array
+let partWorkingDayStrArr = empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 4)
+                                                .map(dailyHrsAndWage => dailyHrsAndWage.toString());
+
+console.log("\nUC11C => Part Time Working Days Strings : " + partWorkingDayStrArr);
+
+// UC => 11D No working days only using Map function
+let nonWorkingDayNums = empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 0)
+                                             .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+console.log("UC11D => Non Working Day Nums : " + nonWorkingDayNums);
